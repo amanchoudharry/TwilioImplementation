@@ -1,0 +1,43 @@
+	STEPS TO IMPLEMENT TWILIO WITH SPRING BOOT 
+
+1. create a account on twilio
+
+2. add Twilio acc. SID, auth token and Twilio phone number to the application.properties (main/java/resources/applicant.properties)
+
+add following lines and replace with your credentials :
+
+	twilio.account.sid=your_account_sid
+	twilio.auth.token=your_auth_token
+	twilio.phone.number=your_twilio_phone_number
+
+
+
+3. add TWILIO to pom.xml through maven repository (I'm using v8.32) 
+	<dependency>
+    	<groupId>com.twilio.sdk</groupId>
+    	<artifactId>twilio</artifactId>
+    	<version>8.32.0</version>
+	</dependency>
+
+and reload maven
+
+4. (Optional) create a frontend page to enter Phone number and a SOS button with event
+    listener to activate send SMS function , made by you
+5. create a Controller to handle endpoint and make call to the service layer 
+
+6. create a service layer to send SOS SMS
+
+	inject values of Twilio SID , auth Token & Twilio phone number by @Value annotation 	and store it in a String var
+	
+	Initialise Twilio with ` Twilio.init ` passing the acc. SID and Auth token
+
+	then Implement the method for SMS
+
+	create the message with message.creator() func [which s provided by Twilio]
+	It takes 3 arguments  
+	I. Receiver's Phone Number
+	II. Your TWILIO Phone Number
+	III. The message
+	
+7. The method returns response to the frontend
+
